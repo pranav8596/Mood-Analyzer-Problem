@@ -17,5 +17,14 @@ namespace Mood_Analyzer_Test
             string mood = moodAnalyzer.analyzeMood("I am in sad mood");
             Assert.AreEqual("sad", mood);
         }
+
+        [Test]
+        public void givenMessage_WhenContainsAnyMood_ShouldReturnHappy()
+        {
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
+            string mood = moodAnalyzer.analyzeMood("I am in any mood");
+            Assert.AreEqual("happy", mood);
+        }
+
     }
 }

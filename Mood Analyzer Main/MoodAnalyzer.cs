@@ -8,7 +8,14 @@ namespace Mood_Analyzer_Main
     {
         public String analyzeMood(string message)
         {
-            return "sad";
+            if (message.Contains("sad"))
+            {
+                return "sad";
+            }
+            else
+            {
+                return "happy";
+            }
         }
     }
 }
