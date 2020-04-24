@@ -6,6 +6,20 @@ namespace Mood_Analyzer_Main
 {
     public class MoodAnalyzer
     {
+        private String message;
+        public MoodAnalyzer()
+        {
+
+        }
+
+        public MoodAnalyzer(String message)
+        {
+            this.message = message;
+        }
+        public string analyzeMood()
+        {
+            return analyzeMood(message);
+        }
         public String analyzeMood(string message)
         {
             if (message.Contains("sad"))
@@ -17,5 +31,7 @@ namespace Mood_Analyzer_Main
                 return "happy";
             }
         }
+
+        
     }
 }
