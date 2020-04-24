@@ -8,7 +8,7 @@ namespace Mood_Analyzer_Main.exceptions
     {
         public enum ExceptionType
         {
-            NULL_EXCEPTION
+            NULL_EXCEPTION, EMPTY_EXCEPTION
         }
         public ExceptionType type;
         public MoodAnalyzerException(String message, ExceptionType type) : base(message)

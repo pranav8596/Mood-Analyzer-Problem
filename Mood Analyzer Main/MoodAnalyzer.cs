@@ -27,7 +27,11 @@ namespace Mood_Analyzer_Main
         {
             try
             {
-                if (message.Contains("sad"))
+                if(message.Length == 0)
+                {
+                    throw new MoodAnalyzerException("Please enter valid message", MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION);
+                }
+                else if (message.Contains("sad"))
                 {
                     return "sad";
                 }

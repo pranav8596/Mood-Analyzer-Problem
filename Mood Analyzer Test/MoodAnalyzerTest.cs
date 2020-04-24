@@ -56,5 +56,19 @@ namespace Mood_Analyzer_Test
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.NULL_EXCEPTION, e.type);
             }
         }
+
+        [Test]
+        public void givenMessageInConstructor_WhenEmpty_ShouldThowMoodAnalysisException()
+        {
+            try
+            {
+                MoodAnalyzer moodAnalyzer = new MoodAnalyzer("");
+                string mood = moodAnalyzer.analyzeMood();
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION, e.type);
+            }
+        }
     }
 }
