@@ -24,18 +24,26 @@ namespace Mood_Analyzer_Main
 
         public String analyzeMood(string message)
         {
-            if (message.Contains("sad"))
+            try
             {
-                return "sad";
+                if (message.Contains("sad"))
+                {
+                    return "sad";
+                }
+                else if (message.Contains("happy"))
+                {
+                    return "happy";
+                }
+                else
+                {
+                    return "happy";
+                }
             }
-            else if(message.Contains("happy"))
+            catch(NullReferenceException e)
             {
                 return "happy";
             }
-            else
-            {
-                return "happy";
-            }
+           
         }        
     }
 }
