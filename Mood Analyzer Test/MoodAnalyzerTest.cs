@@ -1,4 +1,5 @@
 using Mood_Analyzer_Main;
+using Mood_Analyzer_Main.exceptions;
 using NUnit.Framework;
 
 namespace Mood_Analyzer_Test
@@ -43,11 +44,17 @@ namespace Mood_Analyzer_Test
         }
 
         [Test]
-        public void givenMessageInConstructor_WhenContainsNull_ShouldReturnHappy()
+        public void givenMessageInConstructor_WhenContainsNull_ShouldThowMoodAnalysisException()
         {
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
-            string mood = moodAnalyzer.analyzeMood();
-            Assert.AreEqual("happy", mood);
+            try
+            {
+                MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
+                string mood = moodAnalyzer.analyzeMood();
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.NULL_EXCEPTION, e.type);
+            }
         }
     }
 }

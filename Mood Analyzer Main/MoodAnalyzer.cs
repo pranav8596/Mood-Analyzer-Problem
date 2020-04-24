@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mood_Analyzer_Main.exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,11 +40,10 @@ namespace Mood_Analyzer_Main
                     return "happy";
                 }
             }
-            catch(NullReferenceException e)
+            catch (NullReferenceException e)
             {
-                return "happy";
+                throw new MoodAnalyzerException("Please enter valid messege", MoodAnalyzerException.ExceptionType.NULL_EXCEPTION);
             }
-           
-        }        
+        }
     }
 }
