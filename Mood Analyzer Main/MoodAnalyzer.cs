@@ -26,6 +26,10 @@ namespace Mood_Analyzer_Main
             {
                 return "sad";
             }
+            else if(message.Contains("happy"))
+            {
+                return "happy";
+            }
             else
             {
                 return "happy";
