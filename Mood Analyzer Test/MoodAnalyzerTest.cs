@@ -70,5 +70,13 @@ namespace Mood_Analyzer_Test
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION, e.type);
             }
         }
+
+        [Test]
+        public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject()
+        {
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer();
+            Assert.AreEqual(new MoodAnalyzer(), moodAnalyzer);
+
+        }
     }
 }

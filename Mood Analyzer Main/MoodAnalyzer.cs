@@ -7,9 +7,10 @@ namespace Mood_Analyzer_Main
 {
     public class MoodAnalyzer
     {
-        private String message;
+        public String message;
         public MoodAnalyzer()
         {
+            message = "Default";
 
         }
 
@@ -27,7 +28,7 @@ namespace Mood_Analyzer_Main
         {
             try
             {
-                if(message.Length == 0)
+                if (message.Length == 0)
                 {
                     throw new MoodAnalyzerException("Please enter valid message", MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION);
                 }
@@ -48,6 +49,27 @@ namespace Mood_Analyzer_Main
             {
                 throw new MoodAnalyzerException("Please enter valid messege", MoodAnalyzerException.ExceptionType.NULL_EXCEPTION);
             }
+        }
+
+        /*public bool Equals(Object another)
+        {
+            if (this.message.Equals(((MoodAnalyzer)another).message))
+            {
+                return true; 
+            }
+            return false;
+        }*/
+
+
+        override
+       public bool Equals(Object another)
+        {
+            MoodAnalyzer moodAnalyser = (MoodAnalyzer)another;
+            if (this.message.Equals(moodAnalyser.message))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
