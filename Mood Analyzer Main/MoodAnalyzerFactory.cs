@@ -35,16 +35,6 @@ namespace Mood_Analyzer_Main
 
         }
 
-        /*public static void CreateMoodAnalyzer(string classname, String constructor)
-        {
-            bool checkValidConstr = IsValidConstructor(constructor);
-            if (!checkValidConstr)
-            {
-                throw new MoodAnalyzerException("Method name not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
-            }
-
-        }*/
-
         //To check the validity of class name 
         public static bool IsValidClassname(String classname)
         {
@@ -58,6 +48,7 @@ namespace Mood_Analyzer_Main
             }
         }
 
+        //To check the validity of constuctor name 
         public static bool IsValidConstructor(int constructor)
         {
             if (constructor.Equals((int)constructor))
