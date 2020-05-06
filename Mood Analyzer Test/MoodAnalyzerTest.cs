@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.CompilerServices;
 using Mood_Analyzer_Main;
 using Mood_Analyzer_Main.exceptions;
 using NUnit.Framework;
@@ -83,11 +84,25 @@ namespace Mood_Analyzer_Test
         {
             try
             {
-                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer");
+                MoodAnalyzerFactory.CreateMoodAnalyzer("Mood",0);
             }
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION, e.type);
+
+            }
+        }
+
+        [Test]
+        public void givenMoodAnalyserConstructor_WhenImProper_ShouldReturnMethodNotFoundException()
+        {
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer", 805);
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
 
             }
         }

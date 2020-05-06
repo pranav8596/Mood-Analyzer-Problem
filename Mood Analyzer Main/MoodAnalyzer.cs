@@ -25,6 +25,7 @@ namespace Mood_Analyzer_Main
             return AnalyzeMood(message);
         }
 
+        //To return the mood of the message
         public String AnalyzeMood(string message)
         {
             try
@@ -52,6 +53,7 @@ namespace Mood_Analyzer_Main
             }
         }
 
+        //To check if two objects are equal
         override
        public bool Equals(Object another)
         {
