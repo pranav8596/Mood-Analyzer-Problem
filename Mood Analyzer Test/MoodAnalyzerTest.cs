@@ -121,11 +121,26 @@ namespace Mood_Analyzer_Test
             ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
             try
             {
-                MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "Mood", "I am in happy mood");
+                MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "Mood", 0);
             }
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION, e.type);
+
+            }
+        }
+
+        [Test]
+        public void givenMoodAnalyserParamConstructor_WhenImProper_ShouldReturnMethodNotFoundException()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "MoodAnalyzer", 555);
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
 
             }
         }
