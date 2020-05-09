@@ -114,5 +114,20 @@ namespace Mood_Analyzer_Test
             object mainObj = MoodAnalyzerFactory.CreateMoodAnalyzer(constructorInfo, "MoodAnalyzer", "I am in happy mood");
             Assert.AreEqual(new MoodAnalyzer("I am in happy mood"), mainObj);
         }
+
+        [Test]
+        public void givenMoodAnalyserClass_WhenImProperParamConstr_ShouldReturnClassNotFoundException()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "Mood", "I am in happy mood");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION, e.type);
+
+            }
+        }
     }
 }

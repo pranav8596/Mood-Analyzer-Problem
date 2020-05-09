@@ -19,7 +19,7 @@ namespace Mood_Analyzer_Main
             return (MoodAnalyzer)myObj;
         }
 
-        //To throw the exception if class name is invalid
+        //To throw the exception if class name or method name is invalid
         public static void CreateMoodAnalyzer(String classname, int parameter)
         {
             bool checkValidClass = IsValidClassname(classname);
@@ -34,13 +34,15 @@ namespace Mood_Analyzer_Main
 
             }
         }
+
+        
         public static object CreateMoodAnalyzer(ConstructorInfo constructor, String classname, String message)
         {
             Type type = typeof(MoodAnalyzer);
             object constrObject = Activator.CreateInstance(type, message);
             return constrObject;
-
         }
+
 
 
         //To check the validity of class name 
@@ -81,6 +83,16 @@ namespace Mood_Analyzer_Main
                 }
             }
             return constructorInfo[0];
+        }
+
+        public static void CreateMoodAnalyzerClass(ConstructorInfo constructorInfo, string className, string message)
+        {
+            bool checkValidClass = IsValidClassname(className);
+            if (!checkValidClass)
+            {
+                throw new MoodAnalyzerException("Class name not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
+            }
+           
         }
     }
 }
