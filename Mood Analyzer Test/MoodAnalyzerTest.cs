@@ -2,6 +2,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using Mood_Analyzer_Main;
 using Mood_Analyzer_Main.exceptions;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace Mood_Analyzer_Test
 {
@@ -84,7 +85,7 @@ namespace Mood_Analyzer_Test
         {
             try
             {
-                MoodAnalyzerFactory.CreateMoodAnalyzer("Mood",0);
+                MoodAnalyzerFactory.CreateMoodAnalyzer("Mood", 0);
             }
             catch (MoodAnalyzerException e)
             {
@@ -103,8 +104,15 @@ namespace Mood_Analyzer_Test
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
-
             }
+        }
+
+        [Test]
+        public void givenMoodAnalyserClass_WhenProperParamConstr_ShouldReturnObject()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            object mainObj = MoodAnalyzerFactory.CreateMoodAnalyzer(constructorInfo, "MoodAnalyzer", "I am in happy mood");
+            Assert.AreEqual(new MoodAnalyzer("I am in happy mood"), mainObj);
         }
     }
 }

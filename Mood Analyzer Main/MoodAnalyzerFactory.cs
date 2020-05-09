@@ -4,6 +4,7 @@ using System.Text;
 using System.Reflection;
 using Mood_Analyzer_Main;
 using Mood_Analyzer_Main.exceptions;
+using System.Security;
 
 namespace Mood_Analyzer_Main
 {
@@ -17,7 +18,7 @@ namespace Mood_Analyzer_Main
             object myObj = Activator.CreateInstance(type);
             return (MoodAnalyzer)myObj;
         }
-        
+
         //To throw the exception if class name is invalid
         public static void CreateMoodAnalyzer(String classname, int parameter)
         {
@@ -32,8 +33,15 @@ namespace Mood_Analyzer_Main
                 throw new MoodAnalyzerException("Method name not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
 
             }
+        }
+        public static object CreateMoodAnalyzer(ConstructorInfo constructor, String classname, String message)
+        {
+            Type type = typeof(MoodAnalyzer);
+            object constrObject = Activator.CreateInstance(type, message);
+            return constrObject;
 
         }
+
 
         //To check the validity of class name 
         public static bool IsValidClassname(String classname)
@@ -47,7 +55,7 @@ namespace Mood_Analyzer_Main
                 return false;
             }
         }
-
+        
         //To check the validity of constuctor name 
         public static bool IsValidConstructor(int constructor)
         {
@@ -61,6 +69,18 @@ namespace Mood_Analyzer_Main
             }
         }
 
-       
+        public static ConstructorInfo CreateMoodAnalyzerPar(int parameters)
+        {
+            Type type = typeof(MoodAnalyzer);
+            ConstructorInfo[] constructorInfo = type.GetConstructors();
+            foreach(ConstructorInfo info in constructorInfo)
+            {
+                if(info.GetParameters().Length == parameters)
+                {
+                    return info;
+                }
+            }
+            return constructorInfo[0];
+        }
     }
 }
