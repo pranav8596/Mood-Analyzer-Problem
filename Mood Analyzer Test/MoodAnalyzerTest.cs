@@ -141,7 +141,29 @@ namespace Mood_Analyzer_Test
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
+            }
+        }
 
+        [Test]
+        public void givenHappyMessageUsingReflection_WhenProper_ShouldReturnHappyMood()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            object moodAnal = MoodAnalyzerFactory.CreateMoodAnalyzerInvoke(constructorInfo, "AnalyzeMoodInvoke");
+            Assert.AreEqual("happy", moodAnal);
+        }
+
+
+        [Test]
+        public void givenHappyMessageUsingReflection_WhenImProper_ShouldReturnMethodNotFoundException()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzerInvoke(constructorInfo, "AnalyzeMood");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
             }
         }
     }

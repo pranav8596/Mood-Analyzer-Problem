@@ -53,6 +53,33 @@ namespace Mood_Analyzer_Main
             }
         }
 
+        public String AnalyzeMoodInvoke(string message)
+        {
+            try
+            {
+                if (message.Length == 0)
+                {
+                    throw new MoodAnalyzerException("Please enter valid message", MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION);
+                }
+                else if (message.Contains("sad"))
+                {
+                    return "sad";
+                }
+                else if (message.Contains("happy"))
+                {
+                    return "happy";
+                }
+                else
+                {
+                    return "happy";
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                throw new MoodAnalyzerException("Please enter valid messege", MoodAnalyzerException.ExceptionType.NULL_EXCEPTION);
+            }
+        }
+
         //To check if two objects are equal
         override
        public bool Equals(Object another)

@@ -5,6 +5,7 @@ using System.Reflection;
 using Mood_Analyzer_Main;
 using Mood_Analyzer_Main.exceptions;
 using System.Security;
+using System.Dynamic;
 
 namespace Mood_Analyzer_Main
 {
@@ -13,9 +14,9 @@ namespace Mood_Analyzer_Main
         //To create Object of MoodAnalyzer default constructor
         public static MoodAnalyzer CreateMoodAnalyzer()
         {
-            Type type = typeof(MoodAnalyzer);
-            ConstructorInfo[] constructorInfo = type.GetConstructors();
-            object myObj = Activator.CreateInstance(type);
+            Type type1 = typeof(MoodAnalyzer);
+            ConstructorInfo[] constructorInfo = type1.GetConstructors();
+            object myObj = Activator.CreateInstance(type1);
             return (MoodAnalyzer)myObj;
         }
 
@@ -34,11 +35,11 @@ namespace Mood_Analyzer_Main
 
             }
         }
-        
+
         public static object CreateMoodAnalyzer(ConstructorInfo constructor, String classname, String message)
         {
-            Type type = typeof(MoodAnalyzer);
-            object constrObject = Activator.CreateInstance(type, message);
+            Type type2 = typeof(MoodAnalyzer);
+            object constrObject = Activator.CreateInstance(type2, message);
             return constrObject;
         }
 
@@ -54,7 +55,7 @@ namespace Mood_Analyzer_Main
                 return false;
             }
         }
-        
+
         //To check the validity of constuctor name 
         public static bool IsValidConstructor(int constructor)
         {
@@ -70,11 +71,11 @@ namespace Mood_Analyzer_Main
 
         public static ConstructorInfo CreateMoodAnalyzerPar(int parameters)
         {
-            Type type = typeof(MoodAnalyzer);
-            ConstructorInfo[] constructorInfo = type.GetConstructors();
-            foreach(ConstructorInfo info in constructorInfo)
+            Type type3 = typeof(MoodAnalyzer);
+            ConstructorInfo[] constructorInfo = type3.GetConstructors();
+            foreach (ConstructorInfo info in constructorInfo)
             {
-                if(info.GetParameters().Length == parameters)
+                if (info.GetParameters().Length == parameters)
                 {
                     return info;
                 }
@@ -92,6 +93,23 @@ namespace Mood_Analyzer_Main
                 throw new MoodAnalyzerException("Class name not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
             }
             else if (checkValidConstr)
+            {
+                throw new MoodAnalyzerException("Method name not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
+
+            }
+        }
+
+        public static object CreateMoodAnalyzerInvoke(ConstructorInfo constructorInfo, String methodName)
+        {
+            Type type4 = typeof(MoodAnalyzer);
+            object stringConstr = constructorInfo.Invoke(new object[] { "I am in a happy mood" });
+            if (methodName.Equals("AnalyzeMoodInvoke"))
+            {
+                MethodInfo methodInfo = type4.GetMethod(methodName);
+                object mainObj = methodInfo.Invoke(stringConstr, new object[] { "I am in happy mood" });
+                return mainObj;
+            }
+            else
             {
                 throw new MoodAnalyzerException("Method name not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
 
