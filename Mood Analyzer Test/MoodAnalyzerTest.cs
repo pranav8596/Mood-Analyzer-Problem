@@ -73,6 +73,7 @@ namespace Mood_Analyzer_Test
             }
         }
 
+        //Default constructor
         [Test]
         public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject()
         {
@@ -107,10 +108,11 @@ namespace Mood_Analyzer_Test
             }
         }
 
+        //Parameterized constructor
         [Test]
         public void givenMoodAnalyserClass_WhenProperParamConstr_ShouldReturnObject()
         {
-            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
             object mainObj = MoodAnalyzerFactory.CreateMoodAnalyzer(constructorInfo, "MoodAnalyzer", "I am in happy mood");
             Assert.AreEqual(new MoodAnalyzer("I am in happy mood"), mainObj);
         }
@@ -118,7 +120,7 @@ namespace Mood_Analyzer_Test
         [Test]
         public void givenMoodAnalyserClass_WhenImProperParamConstr_ShouldReturnClassNotFoundException()
         {
-            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
             try
             {
                 MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "Mood", 0);
@@ -133,7 +135,7 @@ namespace Mood_Analyzer_Test
         [Test]
         public void givenMoodAnalyserParamConstructor_WhenImProper_ShouldReturnMethodNotFoundException()
         {
-            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
             try
             {
                 MoodAnalyzerFactory.CreateMoodAnalyzerClass(constructorInfo, "MoodAnalyzer", 555);
@@ -147,7 +149,7 @@ namespace Mood_Analyzer_Test
         [Test]
         public void givenHappyMessageUsingReflection_WhenProper_ShouldReturnHappyMood()
         {
-            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
             object moodAnal = MoodAnalyzerFactory.CreateMoodAnalyzerInvoke(constructorInfo, "AnalyzeMoodInvoke");
             Assert.AreEqual("happy", moodAnal);
         }
@@ -156,7 +158,7 @@ namespace Mood_Analyzer_Test
         [Test]
         public void givenHappyMessageUsingReflection_WhenImProper_ShouldReturnMethodNotFoundException()
         {
-            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateMoodAnalyzerPar(1);
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
             try
             {
                 MoodAnalyzerFactory.CreateMoodAnalyzerInvoke(constructorInfo, "AnalyzeMood");
@@ -164,6 +166,30 @@ namespace Mood_Analyzer_Test
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
+            }
+        }
+
+
+        [Test]
+        public void givenHappyMessageInFieldName_WhenProper_ShouldReturnHappyMood()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
+            object mood = MoodAnalyzerFactory.SetField(constructorInfo, "message", "AnalyzeMoodInvoke", "I am in a happy mood");
+            Assert.AreEqual("happy", mood);
+        }
+
+        [Test]
+        public void givenHappyMessageInFieldName_WhenImProper_ShouldReturnFieldNotFoundException()
+        {
+            ConstructorInfo constructorInfo = MoodAnalyzerFactory.CreateParamConstructor(1);
+            try
+            {
+                MoodAnalyzerFactory.SetField(constructorInfo, "mesage", "AnalyzeMoodInvoke", "I am in a happy mood");
+
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.FIELD_NOT_FOUND_EXCEPTION, e.type);
             }
         }
     }

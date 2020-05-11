@@ -25,7 +25,12 @@ namespace Mood_Analyzer_Main
             return AnalyzeMood(message);
         }
 
-        //To return the mood of the message
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public String AnalyzeMood(string message)
         {
             try
